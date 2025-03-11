@@ -83,4 +83,45 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Naujienlaiškio for
+    // Naujienlaiškio formos validacija ir siuntimas
+    const newsletterForm = document.querySelector('.newsletter-form');
+    
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const emailInput = this.querySelector('input[type="email"]');
+            const email = emailInput.value;
+            
+            if (email) {
+                // Čia būtų el. pašto siuntimo logika į serverį
+                // Šiuo atveju tiesiog parodome sėkmės pranešimą
+                
+                alert(`Ačiū! Jūs sėkmingai užsiprenumeravote naujienlaiškį. Jūsų 10% nuolaidos kodas: GRYBUKAI10`);
+                
+                // Išvalyti formą
+                emailInput.value = '';
+            }
+        });
+    }
+    
+    // Animuoti elementus, kai jie tampa matomi
+    const animateOnScroll = function() {
+        const elements = document.querySelectorAll('.benefit-card, .product-card, .testimonial, .step');
+        
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (elementPosition < windowHeight - 100) {
+                element.classList.add('visible');
+            }
+        });
+    };
+    
+    // Iškviesti animaciją pirmą kartą užkrovus puslapį
+    animateOnScroll();
+    
+    // Iškviesti animaciją scrollinant
+    window.addEventListener('scroll', animateOnScroll);
+});
